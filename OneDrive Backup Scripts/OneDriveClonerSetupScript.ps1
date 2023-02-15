@@ -7,7 +7,7 @@ function WaitForUserToCloseWindow()
 
   if ($isError)
   {
-    Write-Host "Sorry, something went wrong. Send me a screenshot of this."
+    Write-Host "Sorry, something went wrong."
   }
 
   Write-Host "Press Esc to exit."
@@ -98,7 +98,7 @@ try
 }
 catch
 {
-    Write-Host "Error configuring OneDrive remote. Call Sanjay!"
+    Write-Host "Error configuring OneDrive remote."
     WaitForUserToCloseWindow
 }
 
@@ -116,7 +116,7 @@ $successMessage = @"
 Write-Host $successMessage
 Write-Host
 Write-Host
-Write-Host "Next, run the ODSyncScript or schedule it with Windows Task Scheduler. Please call if instructions unclear."
+Write-Host "Next, run the SyncScript or schedule it with Windows Task Scheduler."
 
 cd "$desktop"
 WaitForUserToCloseWindow -isError:$false
