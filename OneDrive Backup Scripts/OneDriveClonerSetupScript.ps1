@@ -8,6 +8,7 @@ function WaitForUserToCloseWindow()
   if ($isError)
   {
     Write-Host "Sorry, something went wrong."
+    Write-Host "Sorry, something went wrong."
   }
 
   Write-Host "Press Esc to exit."
@@ -98,6 +99,7 @@ try
 }
 catch
 {
+    Write-Host "Error configuring OneDrive remote."
     Write-Host "Error configuring OneDrive remote."
     WaitForUserToCloseWindow
 }
