@@ -4,7 +4,8 @@ $OneDriveClonerPath = "$env:USERPROFILE\Desktop\OneDrive Backup Scripts\OneDrive
 # Define the path to the local source folder to be backed up.
 $LocalSourceFolder = "D:\Docs"
 
-# Define the name of the remote OneDrive location to be backed up to.
+# Define the name of the remote created for your OneDrive account with Rclone. 
+# If unsure, check C:\Users\UserName\AppData\Roaming\rclone\rclone.conf.
 $RemoteName = "onedrive-remote"
 
 # Define the name of the remote OneDrive folder to copy the files into.
