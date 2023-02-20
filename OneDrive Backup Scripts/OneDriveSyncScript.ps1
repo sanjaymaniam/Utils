@@ -1,3 +1,15 @@
+# Define the path to the OneDriveCloner folder on the user's desktop.
+$OneDriveClonerPath = "$env:USERPROFILE\Desktop\OneDrive Backup Scripts\OneDriveCloner"
+
+# Define the path to the local source folder to be backed up.
+$LocalSourceFolder = "D:\Docs"
+
+# Define the name of the remote OneDrive location to be backed up to.
+$RemoteName = "onedrive-remote"
+
+# Define the name of the remote OneDrive folder to copy the files into.
+$RemoteFolderName = "\Docs\"
+
 function WaitForUserToCloseWindow()
 {
   param
@@ -36,22 +48,20 @@ Write-Host $welcomeMessage
 
 try
 {
-    $OneDriveClonerPath = "$env:USERPROFILE\Desktop\OneDriveCloner"
+   # Check if rclone exists in the given path.
     $rcloneFolder = Get-ChildItem -Path $OneDriveClonerPath | Where-Object { $_.PSIsContainer -and $_.Name -match "^rclone.*windows-amd64$" }
-
-    $sourceFolder = "D:\"
-    $remote = "onedrive-remote"
-    $remoteFolder = "HDDBackup"
 
     if ($rcloneFolder) 
     {
         Write-Host "The OneDriveCloner sub-folder exists."
         cd $OneDriveClonerPath\$rcloneFolder  
-        Write-Host "Copying from $sourceFolder to ${remote}:${remoteFolder}"
+        Write-Host "Copying from $LocalSourceFolder to ${RemoteName}:${RemoteFolderName}"
         Write-Host
 
-        .\rclone.exe copy $sourceFolder "${remote}:${remoteFolder}" --progress
-        cd "$env:USERPROFILE\Desktop"
+        # Start copying items in $LocalSourceFolder to given directory in remote.
+        # Logs are generated and stored in rcloneFolder\log.txt.
+        .\rclone.exe copy $LocalSourceFolder "${RemoteName}:${RemoteFolderName}" --progress --log-file=log.txt -vv
+        cd "$env:USERPROFILE\"
         WaitForUserToCloseWindow -isError:$false
     }
     else 
